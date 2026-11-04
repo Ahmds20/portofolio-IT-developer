@@ -349,17 +349,17 @@
         "Tailwind CSS",
         "PostgreSQL"
       ],
-      "linkKode": "",
+      "linkKode": "https://github.com/Ahmds20/Website-Kopi-4",
       "linkDemo": "",
       "jenis": "fullstack",
       "stack": [
         {
           "lapisan": "fe",
-          "teknologi": "React, Tailwind CSS"
+          "teknologi": "React, Tailwind CSS, Figma"
         },
         {
           "lapisan": "be",
-          "teknologi": "Django"
+          "teknologi": "Django, Python"
         },
         {
           "lapisan": "db",

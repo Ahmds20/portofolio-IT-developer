@@ -94,7 +94,8 @@
         "AWS",
         "Docker",
         "GitHub Actions",
-        "Grafana"
+        "Grafana",
+        "Prometheus"
       ]
     }
   ],
@@ -376,7 +377,8 @@
         "CSS",
         "JavaScript",
         "React",
-        "Tailwind CSS"
+        "Tailwind CSS",
+        "V"
       ],
       "lapisan": "fe"
     },
@@ -450,7 +452,8 @@
       "tag": [
         "scikit-learn",
         "XGBoost",
-        "Random Forest"
+        "Random Forest",
+        "Naive Bayes"
       ],
       "lapisan": ""
     },
@@ -460,7 +463,8 @@
         "Problem Solving",
         "Analytical Thinking",
         "Attention to Detail",
-        "Team Collaboration"
+        "Team Collaboration",
+        "Communication"
       ],
       "lapisan": ""
     }

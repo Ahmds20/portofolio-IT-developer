@@ -2,49 +2,75 @@
   "profil": {
     "nama": "Ahmad Jazil Faiz",
     "peran": "Software Engineer",
-    "ringkasan": "Experienced in full-stack web development, with hands-on experience building responsive web applications, developing backend services and APIs, managing databases, and integrating frontend and backend systems. Skilled in software testing, deployment, and application monitoring, with an interest in building scalable, efficient, and reliable software solutions.",
+    "ringkasan": "Experienced in *full-stack web development*, with hands-on experience building responsive web applications, developing *backend services and APIs*, managing databases, and integrating frontend and backend systems. Skilled in software testing, deployment, and application monitoring, with an interest in building scalable, efficient, and reliable software solutions.",
     "terbukaKerja": true,
     "teksStatus": "Aspiring Software Engineer",
-    "lokasi": "Jagakarsa, Jakarta Selatan",
+    "lokasi": "Jagakarsa, South Jakarta",
     "foto": "assets/img/profile.jpg",
     "cv": "assets/docs/CV-Ahmad-Jazil-Faiz.pdf",
     "metaDeskripsi": "Full Stack Developer and Informatics graduate from Gunadarma University, with experience in frontend and backend development, building web applications, API integration, database management, software testing, deployment, and application monitoring. Explore his projects and technical experience in software development, cloud computing, and machine learning."
   },
+  "arsitektur": [
+    {
+      "lapisan": "fe",
+      "nama": "Frontend",
+      "teknologi": "React · Tailwind CSS · Twig",
+      "keterangan": "responsive interfaces"
+    },
+    {
+      "lapisan": "be",
+      "nama": "API",
+      "teknologi": "Django · Flask · REST API",
+      "keterangan": "business logic & authentication"
+    },
+    {
+      "lapisan": "db",
+      "nama": "Data",
+      "teknologi": "PostgreSQL · MySQL · MongoDB",
+      "keterangan": "schemas & queries"
+    },
+    {
+      "lapisan": "ops",
+      "nama": "Ops",
+      "teknologi": "Docker · GitHub Actions · AWS · Prometheus · Grafana",
+      "keterangan": "deployment & monitoring"
+    }
+  ],
   "statistik": [
     {
       "nilai": "3.80",
-      "label": "IPK dari 4.00"
+      "label": "GPA out of 4.00"
     },
     {
-      "nilai": "99,89%",
-      "label": "Akurasi deteksi DDoS"
+      "nilai": "99.89%",
+      "label": "DDoS detection accuracy"
     },
     {
-      "nilai": "41.188",
-      "label": "Data diproses PRISM"
+      "nilai": "41,188",
+      "label": "Records processed by PRISM"
     },
     {
-      "nilai": "12",
-      "label": "Sertifikasi"
+      "nilai": "13",
+      "label": "Certifications"
     }
   ],
   "tentang": {
     "judul": "Get to Know Me",
     "paragraf": [
-      "I am an Informatics graduate from Gunadarma University with a strong interest in Full Stack Development and Software Engineering. I have hands-on experience developing web applications, building frontend interfaces, implementing backend services, designing databases, and integrating APIs.",
+      "I am an Informatics graduate from Gunadarma University with a strong interest in *Full Stack Development and Software Engineering*. I have hands-on experience developing web applications, building frontend interfaces, implementing backend services, designing databases, and integrating APIs.",
       "Through academic projects and professional experience, I have worked with technologies such as JavaScript, React, Django, Python, Flask, FastAPI, and PostgreSQL. I also have experience in software testing, deployment, application monitoring, cloud computing, and machine learning."
     ]
   },
   "pengalaman": [
     {
-      "periode": "Mar 2025 – Agu 2025",
+      "periode": "Mar 2025 – Aug 2025",
       "posisi": "Frontend Web Developer Intern",
       "organisasi": "PT Cronos Studio Indonesia",
       "poin": [
-        "Berkontribusi dalam pengembangan dan pemeliharaan website rekrutmen berbasis Drupal 10 di lingkungan produksi.",
-        "Mengembangkan fitur front-end responsif dengan HTML, CSS, JavaScript, dan Twig yang konsisten di berbagai ukuran layar dan browser.",
-        "Melakukan cross-browser dan functional testing untuk meningkatkan keandalan dan usability aplikasi.",
-        "Berkolaborasi dengan tim desain dan back-end, serta mengelola task harian menggunakan Jira."
+        "Contributed to the development and maintenance of a Drupal 10-based recruitment website in a production environment.",
+        "Developed responsive front-end features with HTML, CSS, JavaScript, and Twig that stay consistent across screen sizes and browsers.",
+        "Performed cross-browser and functional testing to improve application reliability and usability.",
+        "Collaborated with the design and back-end teams, and managed daily tasks in Jira."
       ],
       "tag": [
         "Drupal 10",
@@ -55,13 +81,13 @@
       ]
     },
     {
-      "periode": "Agu 2025 – Jan 2026",
+      "periode": "Aug 2025 – Jan 2026",
       "posisi": "Machine Learning Cohort",
       "organisasi": "Dicoding Academy Indonesia · in association with Accenture",
       "poin": [
-        "Program pelatihan intensif dengan pengalaman langsung dalam pengembangan sistem, pengujian, troubleshooting, deployment, monitoring, dan dokumentasi teknis.",
-        "Mengembangkan PRISM, sistem prediksi berbasis web (AUC 0,81) yang mengidentifikasi 4.640 potential leads dari 41.188 data pelanggan.",
-        "Melakukan deployment dan monitoring di AWS dengan Prometheus & Grafana, serta menerapkan Docker dan GitHub Actions dalam workflow."
+        "Intensive training program with hands-on experience in system development, testing, troubleshooting, deployment, monitoring, and technical documentation.",
+        "Built PRISM, a web-based prediction system (AUC 0.81) that identified 4,640 potential leads from 41,188 customer records.",
+        "Deployed and monitored services on AWS with Prometheus & Grafana, and applied Docker and GitHub Actions in the workflow."
       ],
       "tag": [
         "Python",
@@ -72,25 +98,177 @@
       ]
     }
   ],
+  "riwayat": [
+    {
+      "aksi": "commit",
+      "cabang": "main",
+      "induk": "main",
+      "tutupInduk": false,
+      "tanggal": "Sep 2022",
+      "tautan": "pendidikan:Gunadarma University",
+      "teks": "",
+      "keterangan": ""
+    },
+    {
+      "aksi": "cabang",
+      "cabang": "feature/coffee-shop",
+      "induk": "main",
+      "tutupInduk": false,
+      "tanggal": "Sep 2024",
+      "tautan": "",
+      "teks": "",
+      "keterangan": ""
+    },
+    {
+      "aksi": "commit",
+      "cabang": "feature/coffee-shop",
+      "induk": "main",
+      "tutupInduk": false,
+      "tanggal": "Sep 2024",
+      "tautan": "proyek:E-commerce Coffee Shop",
+      "teks": "",
+      "keterangan": ""
+    },
+    {
+      "aksi": "merge",
+      "cabang": "feature/coffee-shop",
+      "induk": "main",
+      "tutupInduk": false,
+      "tanggal": "Jan 2025",
+      "tautan": "",
+      "teks": "",
+      "keterangan": ""
+    },
+    {
+      "aksi": "commit",
+      "cabang": "main",
+      "induk": "main",
+      "tutupInduk": false,
+      "tanggal": "Jan 2025",
+      "tautan": "",
+      "teks": "Network topology design (Cisco Packet Tracer)",
+      "keterangan": "Multi-subnet WAN, IP addressing, static routing"
+    },
+    {
+      "aksi": "cabang",
+      "cabang": "internship/cronos-studio",
+      "induk": "main",
+      "tutupInduk": false,
+      "tanggal": "Mar 2025",
+      "tautan": "",
+      "teks": "",
+      "keterangan": ""
+    },
+    {
+      "aksi": "commit",
+      "cabang": "internship/cronos-studio",
+      "induk": "main",
+      "tutupInduk": false,
+      "tanggal": "Mar 2025",
+      "tautan": "pengalaman:Frontend Web Developer Intern",
+      "teks": "",
+      "keterangan": ""
+    },
+    {
+      "aksi": "cabang",
+      "cabang": "cohort/dicoding-accenture",
+      "induk": "internship/cronos-studio",
+      "tutupInduk": true,
+      "tanggal": "Aug 2025",
+      "tautan": "",
+      "teks": "",
+      "keterangan": ""
+    },
+    {
+      "aksi": "commit",
+      "cabang": "cohort/dicoding-accenture",
+      "induk": "main",
+      "tutupInduk": false,
+      "tanggal": "Aug 2025",
+      "tautan": "pengalaman:Machine Learning Cohort",
+      "teks": "",
+      "keterangan": ""
+    },
+    {
+      "aksi": "commit",
+      "cabang": "cohort/dicoding-accenture",
+      "induk": "main",
+      "tutupInduk": false,
+      "tanggal": "Aug 2025",
+      "tautan": "proyek:PRISM — Predictive Ranking & Insight Scoring Model",
+      "teks": "",
+      "keterangan": ""
+    },
+    {
+      "aksi": "merge",
+      "cabang": "cohort/dicoding-accenture",
+      "induk": "main",
+      "tutupInduk": false,
+      "tanggal": "Jan 2026",
+      "tautan": "",
+      "teks": "",
+      "keterangan": ""
+    },
+    {
+      "aksi": "cabang",
+      "cabang": "feature/final-project",
+      "induk": "main",
+      "tutupInduk": false,
+      "tanggal": "Feb 2026",
+      "tautan": "",
+      "teks": "",
+      "keterangan": ""
+    },
+    {
+      "aksi": "commit",
+      "cabang": "feature/final-project",
+      "induk": "main",
+      "tutupInduk": false,
+      "tanggal": "Feb 2026",
+      "tautan": "proyek:Real-time DDoS Detection & Automated Mitigation System",
+      "teks": "",
+      "keterangan": ""
+    },
+    {
+      "aksi": "merge",
+      "cabang": "feature/final-project",
+      "induk": "main",
+      "tutupInduk": false,
+      "tanggal": "Sep 2026",
+      "tautan": "",
+      "teks": "",
+      "keterangan": ""
+    },
+    {
+      "aksi": "head",
+      "cabang": "main",
+      "induk": "main",
+      "tutupInduk": false,
+      "tanggal": "Now",
+      "tautan": "",
+      "teks": "open to work",
+      "keterangan": ""
+    }
+  ],
   "proyek": [
     {
       "unggulan": true,
       "ikon": "shield",
-      "label": "Proyek Akhir · Universitas Gunadarma",
+      "label": "Final Project · Gunadarma University",
       "periode": "Feb 2026 – Sep 2026",
-      "judul": "Sistem Deteksi DDoS & Mitigasi Otomatis Real-time",
-      "deskripsi": "Sistem deteksi serangan DDoS secara real-time di Linux menggunakan CICFlowMeter dan Random Forest. Dilengkapi automated IP blocking via iptables untuk respons otomatis terhadap sumber serangan, serta dashboard monitoring trafik, serangan terdeteksi, dan alert.",
+      "judul": "Real-time DDoS Detection & Automated Mitigation System",
+      "deskripsi": "A real-time DDoS attack detection system on Linux built with CICFlowMeter and Random Forest. It blocks attacking IPs automatically through iptables and includes a monitoring dashboard for traffic, detected attacks, and alerts.",
       "metrik": [
         {
-          "nilai": "99,89%",
+          "nilai": "99.89%",
           "label": "Accuracy"
         },
         {
-          "nilai": "99,90%",
+          "nilai": "99.90%",
           "label": "Recall"
         },
         {
-          "nilai": "99,94%",
+          "nilai": "99.94%",
           "label": "F1-score"
         }
       ],
@@ -103,22 +281,34 @@
         "Grafana"
       ],
       "linkKode": "",
-      "linkDemo": ""
+      "linkDemo": "",
+      "jenis": "backend · systems",
+      "stack": [
+        {
+          "lapisan": "be",
+          "teknologi": "Python, Flask, Random Forest, iptables"
+        },
+        {
+          "lapisan": "ops",
+          "teknologi": "Prometheus, Grafana"
+        }
+      ],
+      "singkat": "DDoS Detection"
     },
     {
       "unggulan": false,
       "ikon": "chart",
       "label": "Dicoding × Accenture",
-      "periode": "Agu 2025 – Jan 2026",
+      "periode": "Aug 2025 – Jan 2026",
       "judul": "PRISM — Predictive Ranking & Insight Scoring Model",
-      "deskripsi": "Sistem prediksi berbasis web yang memproses 41.188 data pelanggan dan mengidentifikasi 4.640 potential leads. Di-deploy di AWS dengan monitoring Prometheus & Grafana.",
+      "deskripsi": "A web-based prediction system that processes 41,188 customer records and identifies 4,640 potential leads. Deployed on AWS with Prometheus & Grafana monitoring.",
       "metrik": [
         {
-          "nilai": "0,81",
+          "nilai": "0.81",
           "label": "AUC"
         },
         {
-          "nilai": "4.640",
+          "nilai": "4,640",
           "label": "Leads"
         }
       ],
@@ -130,15 +320,27 @@
         "GitHub Actions"
       ],
       "linkKode": "",
-      "linkDemo": ""
+      "linkDemo": "",
+      "jenis": "backend · ml",
+      "stack": [
+        {
+          "lapisan": "be",
+          "teknologi": "Python, XGBoost, scikit-learn"
+        },
+        {
+          "lapisan": "ops",
+          "teknologi": "Docker, GitHub Actions, AWS"
+        }
+      ],
+      "singkat": "PRISM"
     },
     {
       "unggulan": false,
       "ikon": "cart",
-      "label": "Proyek Akademik",
+      "label": "Academic Project",
       "periode": "Sep 2024 – Jan 2025",
       "judul": "E-commerce Coffee Shop",
-      "deskripsi": "Website e-commerce full-stack untuk bisnis kedai kopi dengan fitur autentikasi, keranjang belanja, pengelolaan pesanan, dan integrasi pembayaran. Frontend, backend, dan database terintegrasi end-to-end.",
+      "deskripsi": "A full-stack e-commerce website for a coffee shop with authentication, a shopping cart, order management, and payment integration. Frontend, backend, and database are integrated end to end.",
       "metrik": [],
       "tag": [
         "Django",
@@ -147,24 +349,23 @@
         "PostgreSQL"
       ],
       "linkKode": "",
-      "linkDemo": ""
-    },
-    {
-      "unggulan": false,
-      "ikon": "network",
-      "label": "Proyek Akademik",
-      "periode": "Jan 2025 – Mar 2025",
-      "judul": "Network Topology Design & Configuration",
-      "deskripsi": "Desain dan konfigurasi topologi WAN multi-subnet di Cisco Packet Tracer, meliputi IP addressing, static routing, dan connectivity testing hingga tercapai end-to-end connectivity.",
-      "metrik": [],
-      "tag": [
-        "Cisco Packet Tracer",
-        "Static Routing",
-        "Subnetting",
-        "Cisco IOS"
+      "linkDemo": "",
+      "jenis": "fullstack",
+      "stack": [
+        {
+          "lapisan": "fe",
+          "teknologi": "React, Tailwind CSS"
+        },
+        {
+          "lapisan": "be",
+          "teknologi": "Django"
+        },
+        {
+          "lapisan": "db",
+          "teknologi": "PostgreSQL"
+        }
       ],
-      "linkKode": "",
-      "linkDemo": ""
+      "singkat": "Coffee Shop"
     }
   ],
   "keahlian": [
@@ -176,7 +377,8 @@
         "JavaScript",
         "React",
         "Tailwind CSS"
-      ]
+      ],
+      "lapisan": "fe"
     },
     {
       "kategori": "Backend",
@@ -185,7 +387,8 @@
         "Django",
         "Flask",
         "REST API"
-      ]
+      ],
+      "lapisan": "be"
     },
     {
       "kategori": "Database",
@@ -195,7 +398,8 @@
         "SQLite",
         "MySQL",
         "MongoDB"
-      ]
+      ],
+      "lapisan": "db"
     },
     {
       "kategori": "Tools & DevOps",
@@ -205,7 +409,8 @@
         "GitHub Actions",
         "Linux",
         "SSH"
-      ]
+      ],
+      "lapisan": "ops"
     },
     {
       "kategori": "Cloud Computing",
@@ -214,7 +419,8 @@
         "Cloud Deployment",
         "Cloud Monitoring",
         "AWS re/Start Graduate"
-      ]
+      ],
+      "lapisan": "ops"
     },
     {
       "kategori": "Testing & Monitoring",
@@ -224,7 +430,8 @@
         "Troubleshooting",
         "Prometheus",
         "Grafana"
-      ]
+      ],
+      "lapisan": "ops"
     },
     {
       "kategori": "Networking",
@@ -233,8 +440,10 @@
         "IP Addressing",
         "Subnetting",
         "LAN/WAN",
-        "Static Routing"
-      ]
+        "Static Routing",
+        "Cisco Packet Tracer"
+      ],
+      "lapisan": ""
     },
     {
       "kategori": "Machine Learning",
@@ -242,7 +451,8 @@
         "scikit-learn",
         "XGBoost",
         "Random Forest"
-      ]
+      ],
+      "lapisan": ""
     },
     {
       "kategori": "Soft Skills",
@@ -251,22 +461,33 @@
         "Analytical Thinking",
         "Attention to Detail",
         "Team Collaboration"
-      ]
+      ],
+      "lapisan": ""
     }
   ],
   "pendidikan": [
     {
-      "institusi": "Universitas Gunadarma",
-      "jurusan": "S1 Informatika",
-      "periode": "Sep 2022 – Agu 2026",
-      "nilai": "IPK 3.80 / 4.00",
-      "deskripsi": "Mempelajari pemrograman, algoritma, jaringan komputer, dan dasar keamanan informasi. Berpengalaman mengembangkan aplikasi web dengan Django, React, dan PostgreSQL, serta menyelesaikan proyek akhir sistem deteksi DDoS dan mitigasi otomatis secara real-time."
+      "institusi": "Gunadarma University",
+      "jurusan": "Bachelor of Informatics",
+      "periode": "Sep 2022 – Aug 2026",
+      "nilai": "GPA 3.80 / 4.00",
+      "deskripsi": "Studied programming, algorithms, computer networks, and information security fundamentals. Built web applications with Django, React, and PostgreSQL, and completed a final project on real-time DDoS detection and automated mitigation."
     }
   ],
   "sertifikasi": [
     {
+      "penerbit": "Amazon Web Services Training and Certification",
+      "periode": "Oct 2026",
+      "item": [
+        {
+          "nama": "AWS Educate Introduction to Generative AI",
+          "url": "https://www.credly.com/badges/accabb1c-96b5-4c12-acb0-8c34a89dfa7d/public_url"
+        }
+      ]
+    },
+    {
       "penerbit": "Orbit Future Academy",
-      "periode": "Agu – Sep 2026",
+      "periode": "Aug – Sep 2026",
       "item": [
         {
           "nama": "AWS re/Start Graduate",
@@ -275,7 +496,7 @@
       ]
     },
     {
-      "penerbit": "Universitas Gunadarma",
+      "penerbit": "Gunadarma University",
       "periode": "Feb 2025 – Jun 2026",
       "item": [
         {
@@ -294,7 +515,7 @@
     },
     {
       "penerbit": "Dicoding Academy Indonesia",
-      "periode": "Agu – Des 2025",
+      "periode": "Aug – Dec 2025",
       "item": [
         {
           "nama": "Getting Started with Programming for Software Development",
@@ -332,8 +553,8 @@
     }
   ],
   "kontak": {
-    "judul": "Mari berdiskusi",
-    "pengantar": "Saya terbuka untuk peluang kerja sebagai IT Developer, Software Engineer, atau posisi terkait. Silakan hubungi saya melalui salah satu kanal berikut.",
+    "judul": "Let's work together",
+    "pengantar": "I am open to opportunities as a Software Engineer, Fullstack Developer, or Backend Developer. Feel free to reach out through any of the channels below.",
     "tautan": [
       {
         "ikon": "mail",
@@ -344,7 +565,7 @@
       },
       {
         "ikon": "phone",
-        "label": "Telepon / WhatsApp",
+        "label": "Phone / WhatsApp",
         "teks": "0812-8798-9375",
         "url": "https://wa.me/6281287989375",
         "tampilDiHero": false
@@ -362,13 +583,6 @@
         "teks": "github.com/Ahmds20",
         "url": "https://github.com/Ahmds20",
         "tampilDiHero": true
-      },
-      {
-        "ikon": "chart",
-        "label": "Portofolio Data Science",
-        "teks": "my-portfolio-drab-three-13.vercel.app",
-        "url": "https://my-portfolio-drab-three-13.vercel.app/",
-        "tampilDiHero": false
       }
     ]
   }

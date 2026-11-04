@@ -4,7 +4,7 @@ body { background: var(--bg-alt); min-height: 100vh; }
 input, textarea, select, button { font: inherit; color: inherit; }
 
 /* ---------- Form dasar ---------- */
-.field { display: grid; gap: .35rem; margin-bottom: 1rem; }
+.field { display: grid; gap: .35rem; margin-bottom: 1rem; align-content: start; }
 .field > label, .field-label { font-size: .85rem; font-weight: 600; }
 .hint { font-size: .78rem; color: var(--muted); }
 .input, .textarea, .select {

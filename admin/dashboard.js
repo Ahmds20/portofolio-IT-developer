@@ -7,12 +7,40 @@ const S = Admin.getSession();
 const NS = "http://www.w3.org/2000/svg";
 const MAX_FILE = 5 * 1024 * 1024;
 
-const PROJECT_ICONS = ["code", "shield", "chart", "cart", "network", "globe", "db", "mobile", "cpu", "award", "cap"];
 const CONTACT_ICONS = ["mail", "phone", "linkedin", "github", "globe", "chart", "code", "pin"];
+const LAYER_OPTIONS = [
+  { value: "fe", label: "FE · Frontend" },
+  { value: "be", label: "BE · Backend / API" },
+  { value: "db", label: "DB · Database" },
+  { value: "ops", label: "OPS · DevOps & Cloud" },
+];
+
+// Baris git graph di bagian Experience
+const GRAPH_ACTIONS = [
+  { value: "commit", label: "Commit (titik)" },
+  { value: "cabang", label: "Cabang baru (branch)" },
+  { value: "merge", label: "Merge (gabung)" },
+  { value: "head", label: "HEAD (posisi sekarang)" },
+];
+// Isi yang bisa ditautkan ke sebuah commit. Disimpan sebagai "jenis:judul".
+const refOptions = (d) => [
+  { value: "", label: "Tanpa tautan, tulis teks sendiri" },
+  ...(d?.pengalaman || []).filter((x) => x.posisi).map((x) => ({ value: `pengalaman:${x.posisi}`, label: `Pengalaman · ${x.posisi}` })),
+  ...(d?.proyek || []).filter((x) => x.judul).map((x) => ({ value: `proyek:${x.judul}`, label: `Proyek · ${x.singkat || x.judul}` })),
+  ...(d?.pendidikan || []).filter((x) => x.institusi).map((x) => ({ value: `pendidikan:${x.institusi}`, label: `Pendidikan · ${x.institusi}` })),
+];
+function graphRowTitle(r) {
+  const p = r.induk || "main";
+  if (r.aksi === "cabang") return `Cabang baru: ${r.cabang || "…"} (dari ${p})`;
+  if (r.aksi === "merge") return `Merge: ${r.cabang || "…"} → ${p}`;
+  if (r.aksi === "head") return `HEAD → ${r.teks || "…"}`;
+  const ref = r.tautan ? r.tautan.slice(r.tautan.indexOf(":") + 1) : r.teks;
+  return `Commit di ${r.cabang || "main"}: ${ref || "…"}`;
+}
 
 // ---------------------------------------------------------------------
 // Skema konten
-// type: text | textarea | url | bool | tags | icon | file | lines | list
+// type: text | textarea | url | bool | tags | icon | select | file | lines | list
 // ---------------------------------------------------------------------
 const SCHEMA = [
   {
@@ -21,13 +49,26 @@ const SCHEMA = [
     fields: [
       { key: "nama", label: "Nama lengkap", type: "text", required: true, half: true },
       { key: "lokasi", label: "Lokasi", type: "text", half: true },
-      { key: "peran", label: "Peran / jabatan", type: "text", required: true, hint: "Teks sebelum tanda · juga dipakai sebagai judul tab browser." },
-      { key: "ringkasan", label: "Ringkasan singkat", type: "textarea", required: true },
+      { key: "peran", label: "Peran / jabatan", type: "text", required: true, hint: "Pisahkan beberapa peran dengan tanda · agar tampil berwarna, misal: Fullstack · Backend · Software Engineer. Peran pertama dipakai di judul tab browser." },
+      { key: "ringkasan", label: "Ringkasan singkat", type: "textarea", required: true, hint: "Apit kata kunci dengan *bintang* agar diberi efek stabilo, misal: *backend services and APIs*. Cukup 1–2 frasa." },
       { key: "terbukaKerja", label: "Tampilkan lencana status (titik hijau)", type: "bool" },
       { key: "teksStatus", label: "Teks lencana status", type: "text" },
       { key: "foto", label: "Foto profil", type: "file", accept: "image/png,image/jpeg,image/webp", dir: "assets/img" },
       { key: "cv", label: "File CV (PDF)", type: "file", accept: "application/pdf", dir: "assets/docs" },
       { key: "metaDeskripsi", label: "Deskripsi untuk Google & media sosial", type: "textarea", hint: "Idealnya ±160 karakter." },
+    ],
+  },
+  {
+    key: "arsitektur", title: "Diagram Arsitektur", kind: "list",
+    desc: "Lapisan pada diagram di samping nama (hero). Lapisan OPS tampil sebagai pembungkus bergaris putus-putus di bawah.",
+    addLabel: "Tambah lapisan",
+    itemTitle: (l) => l.nama, itemSub: (l) => l.teknologi,
+    newItem: () => ({ lapisan: "be", nama: "", teknologi: "", keterangan: "" }),
+    fields: [
+      { key: "lapisan", label: "Jenis lapisan (warna)", type: "select", options: LAYER_OPTIONS, half: true },
+      { key: "nama", label: "Nama lapisan", type: "text", required: true, half: true, hint: "Contoh: Frontend, API, Data" },
+      { key: "teknologi", label: "Teknologi", type: "text", required: true, hint: "Contoh: Django · Flask · REST API" },
+      { key: "keterangan", label: "Keterangan singkat", type: "text" },
     ],
   },
   {
@@ -46,17 +87,19 @@ const SCHEMA = [
     desc: "Bagian \"Tentang Saya\".",
     fields: [
       { key: "judul", label: "Judul", type: "text", required: true },
-      { key: "paragraf", label: "Paragraf", type: "lines", rows: 4, addLabel: "Tambah paragraf" },
+      { key: "paragraf", label: "Paragraf", type: "lines", rows: 4, addLabel: "Tambah paragraf", hint: "Apit frasa dengan *bintang* untuk efek stabilo." },
     ],
   },
   {
     key: "pengalaman", title: "Pengalaman", kind: "list",
-    desc: "Riwayat kerja, magang, dan program. Urutan di sini = urutan di website.",
+    desc: "Riwayat kerja, magang, dan program. Agar tampil di website, tautkan sebagai commit di bagian Riwayat (Git Graph).",
     addLabel: "Tambah pengalaman",
-    itemTitle: (p) => p.posisi, itemSub: (p) => p.organisasi,
+    itemTitle: (p) => p.posisi,
+    itemSub: (p) =>
+      data?.riwayat?.length && !data.riwayat.some((r) => r.tautan === `pengalaman:${p.posisi}`) ? "⚠ belum tampil di Riwayat" : p.organisasi,
     newItem: () => ({ periode: "", posisi: "", organisasi: "", poin: [], tag: [] }),
     fields: [
-      { key: "posisi", label: "Posisi", type: "text", required: true, half: true },
+      { key: "posisi", label: "Posisi", type: "text", required: true, half: true, ref: "pengalaman" },
       { key: "periode", label: "Periode", type: "text", required: true, half: true, hint: "Contoh: Mar 2025 – Agu 2025" },
       { key: "organisasi", label: "Perusahaan / organisasi", type: "text", required: true },
       { key: "poin", label: "Poin pekerjaan", type: "lines", rows: 2, addLabel: "Tambah poin" },
@@ -64,18 +107,55 @@ const SCHEMA = [
     ],
   },
   {
-    key: "proyek", title: "Proyek", kind: "list",
-    desc: "Kartu proyek. Proyek unggulan tampil sebagai kartu lebar.",
-    addLabel: "Tambah proyek",
-    itemTitle: (p) => p.judul, itemSub: (p) => (p.unggulan ? "★ unggulan" : p.label),
-    newItem: () => ({ unggulan: false, ikon: "code", label: "", periode: "", judul: "", deskripsi: "", metrik: [], tag: [], linkKode: "", linkDemo: "" }),
+    key: "riwayat", title: "Riwayat (Git Graph)", kind: "list",
+    desc: "Jalur git graph di bagian Experience, dari yang terlama (atas) ke terbaru (bawah). Pola umumnya: buat Cabang baru, isi Commit di cabang itu, lalu Merge kembali ke main. HEAD selalu di baris terakhir.",
+    addLabel: "Tambah baris",
+    itemTitle: graphRowTitle, itemSub: (r) => r.tanggal,
+    newItem: () => ({ aksi: "commit", cabang: "main", induk: "main", tutupInduk: false, tanggal: "", tautan: "", teks: "", keterangan: "" }),
     fields: [
-      { key: "judul", label: "Judul proyek", type: "text", required: true },
+      { key: "aksi", label: "Jenis baris", type: "select", options: GRAPH_ACTIONS, half: true },
+      { key: "tanggal", label: "Tanggal", type: "text", half: true, hint: "Contoh: Mar 2025. Tampil di kolom kiri." },
+      {
+        key: "cabang", label: "Nama cabang", type: "text", when: (r) => r.aksi !== "head",
+        hint: "Commit: cabang tempat titik ini (main = jalur utama). Cabang baru: nama cabangnya, misal internship/cronos-studio. Merge: cabang yang digabungkan.",
+      },
+      {
+        key: "induk", label: "Cabang induk", type: "text", when: (r) => r.aksi === "cabang" || r.aksi === "merge",
+        hint: "Cabang baru: dibuat dari cabang mana. Merge: digabung ke cabang mana (biasanya main).",
+      },
+      { key: "tutupInduk", label: "Cabang induk berakhir di sini (pekerjaan berlanjut di cabang baru)", type: "bool", when: (r) => r.aksi === "cabang" },
+      {
+        key: "tautan", label: "Tampilkan isi dari", type: "select", options: refOptions, when: (r) => r.aksi === "commit",
+        hint: "Pengalaman tampil lengkap dengan poin dan teknologinya. Proyek tampil sebagai tautan ke kartu proyeknya.",
+      },
+      { key: "teks", label: "Teks", type: "text", when: (r) => r.aksi === "head" || (r.aksi === "commit" && !r.tautan), hint: "Untuk HEAD, misal: open to work." },
+      { key: "keterangan", label: "Keterangan tambahan (opsional)", type: "text", when: (r) => r.aksi === "commit" || r.aksi === "cabang" },
+    ],
+  },
+  {
+    key: "proyek", title: "Proyek", kind: "list",
+    desc: "Kartu proyek. Proyek unggulan tampil sebagai kartu lebar. Urutan di sini = urutan di website.",
+    addLabel: "Tambah proyek",
+    itemTitle: (p) => p.judul, itemSub: (p) => (p.unggulan ? "★ unggulan" : p.jenis || p.label),
+    newItem: () => ({ unggulan: false, jenis: "", label: "", periode: "", judul: "", deskripsi: "", stack: [], metrik: [], tag: [], linkKode: "", linkDemo: "" }),
+    fields: [
+      { key: "judul", label: "Judul proyek", type: "text", required: true, half: true, ref: "proyek" },
+      { key: "singkat", label: "Nama singkat", type: "text", half: true, hint: "Dipakai di tabel stack dan panel trace. Contoh: Coffee Shop" },
+      { key: "jenis", label: "Jenis proyek", type: "text", half: true, hint: "Contoh: fullstack, backend · ml" },
       { key: "label", label: "Label", type: "text", half: true, hint: "Contoh: Proyek Akademik" },
-      { key: "periode", label: "Periode", type: "text", half: true },
+      { key: "periode", label: "Periode", type: "text" },
       { key: "deskripsi", label: "Deskripsi", type: "textarea", required: true },
-      { key: "ikon", label: "Ikon", type: "icon", options: PROJECT_ICONS },
       { key: "unggulan", label: "Jadikan proyek unggulan (kartu lebar)", type: "bool" },
+      {
+        key: "stack", label: "Stack per lapisan", type: "list", itemName: "Lapisan", addLabel: "Tambah lapisan",
+        hint: "Tampil di kartu proyek, menyalakan panel trace, dan otomatis mengisi tabel \"Where I have used what\". Pisahkan teknologi dengan koma.",
+        itemTitle: (s) => [LAYER_OPTIONS.find((o) => o.value === s.lapisan)?.label.split(" · ")[0], s.teknologi].filter(Boolean).join(" — "),
+        newItem: () => ({ lapisan: "be", teknologi: "" }),
+        fields: [
+          { key: "lapisan", label: "Lapisan", type: "select", options: LAYER_OPTIONS, half: true },
+          { key: "teknologi", label: "Teknologi", type: "text", required: true, half: true, hint: "Contoh: Django, PostgreSQL" },
+        ],
+      },
       { key: "linkKode", label: "Link kode (GitHub)", type: "url", half: true, placeholder: "https://github.com/…" },
       { key: "linkDemo", label: "Link demo", type: "url", half: true, placeholder: "https://…" },
       {
@@ -87,17 +167,18 @@ const SCHEMA = [
           { key: "label", label: "Keterangan", type: "text", required: true, half: true },
         ],
       },
-      { key: "tag", label: "Teknologi", type: "tags" },
+      { key: "tag", label: "Teknologi (cadangan)", type: "tags", hint: "Dipakai bila Stack per lapisan kosong. Pisahkan dengan Enter atau koma." },
     ],
   },
   {
     key: "keahlian", title: "Keahlian", kind: "list",
-    desc: "Kelompok keahlian beserta daftar teknologinya.",
+    desc: "Keahlian yang sudah muncul di Stack per lapisan proyek tampil di tabel. Sisanya tampil di bawah tabel sebagai \"Also worked with\".",
     addLabel: "Tambah kelompok",
     itemTitle: (k) => k.kategori, itemSub: (k) => `${(k.tag || []).length} item`,
-    newItem: () => ({ kategori: "", tag: [] }),
+    newItem: () => ({ kategori: "", lapisan: "", tag: [] }),
     fields: [
-      { key: "kategori", label: "Nama kelompok", type: "text", required: true },
+      { key: "kategori", label: "Nama kelompok", type: "text", required: true, half: true },
+      { key: "lapisan", label: "Warna lapisan", type: "select", half: true, options: [{ value: "", label: "Tanpa warna" }, ...LAYER_OPTIONS] },
       { key: "tag", label: "Keahlian", type: "tags" },
     ],
   },
@@ -108,7 +189,7 @@ const SCHEMA = [
     itemTitle: (e) => e.institusi, itemSub: (e) => e.jurusan,
     newItem: () => ({ institusi: "", jurusan: "", periode: "", nilai: "", deskripsi: "" }),
     fields: [
-      { key: "institusi", label: "Institusi", type: "text", required: true },
+      { key: "institusi", label: "Institusi", type: "text", required: true, ref: "pendidikan" },
       { key: "jurusan", label: "Jurusan / jenjang", type: "text", half: true },
       { key: "periode", label: "Periode", type: "text", half: true },
       { key: "nilai", label: "Nilai / IPK", type: "text", hint: "Contoh: IPK 3.80 / 4.00" },
@@ -219,8 +300,15 @@ function textControl(f, obj, onChange) {
     type: multi ? null : f.type === "url" ? "url" : "text",
     placeholder: f.placeholder || "", spellcheck: f.type !== "url",
   });
+  // Kolom yang dirujuk oleh Riwayat (Git Graph): saat diganti, rujukannya ikut diganti.
+  let refOld = obj[f.key] ?? "";
   el.addEventListener("input", () => {
     obj[f.key] = el.value;
+    if (f.ref && Array.isArray(data?.riwayat)) {
+      const from = `${f.ref}:${refOld}`, to = `${f.ref}:${el.value}`;
+      data.riwayat.forEach((r) => { if (r.tautan === from) r.tautan = to; });
+      refOld = el.value;
+    }
     el.classList.remove("invalid");
     if (multi) autosize(el);
     onChange();
@@ -279,6 +367,22 @@ function tagsControl(f, obj, onChange) {
   input.addEventListener("blur", commit);
   draw();
   return h("div", { class: "field" }, labelEl(f), box, h("span", { class: "hint" }, f.hint || "Pisahkan dengan Enter atau koma."));
+}
+
+function selectControl(f, obj, onChange) {
+  const id = nextId();
+  const sel = h("select", { id, class: "select" });
+  const fill = () => {
+    const opts = typeof f.options === "function" ? f.options(data) : f.options;
+    const cur = obj[f.key] ?? "";
+    const list = opts.some((o) => o.value === cur) ? opts : [...opts, { value: cur, label: `⚠ Tidak ditemukan: ${cur}` }];
+    sel.replaceChildren(...list.map((o) => h("option", { value: o.value, selected: cur === o.value }, o.label)));
+  };
+  fill();
+  // Pilihan yang diambil dari bagian lain diperbarui setiap kali dibuka
+  if (typeof f.options === "function") sel.addEventListener("focus", fill);
+  sel.addEventListener("change", () => { obj[f.key] = sel.value; onChange(); });
+  return wrap(f, sel, id);
 }
 
 function iconControl(f, obj, onChange) {
@@ -460,20 +564,26 @@ function renderField(f, obj, onChange) {
     case "bool": return boolControl(f, obj, onChange);
     case "tags": return tagsControl(f, obj, onChange);
     case "icon": return iconControl(f, obj, onChange);
+    case "select": return selectControl(f, obj, onChange);
     case "lines": return linesControl(f, obj, onChange);
     case "file": return fileControl(f, obj, onChange);
     case "list":
       if (!Array.isArray(obj[f.key])) obj[f.key] = [];
-      return h("div", { class: "field" }, labelEl(f), listControl(f, obj[f.key], onChange, true));
+      return h("div", { class: "field" }, labelEl(f), f.hint && h("span", { class: "hint" }, f.hint), listControl(f, obj[f.key], onChange, true));
   }
 }
 
-// Kolom "half" yang berurutan digabung jadi dua kolom
+// Kolom "half" yang berurutan digabung jadi dua kolom.
+// Kolom dengan `when` hanya tampil bila kondisinya terpenuhi.
 function renderFields(fields, obj, onChange) {
   const out = [];
+  const conditional = [];
+  const refresh = () => conditional.forEach(({ f, el }) => { el.hidden = !f.when(obj); });
+  const changed = () => { refresh(); onChange(); };
   let row = null;
   for (const f of fields) {
-    const el = renderField(f, obj, onChange);
+    const el = renderField(f, obj, changed);
+    if (f.when) conditional.push({ f, el });
     if (f.half) {
       if (!row) { row = h("div", { class: "grid-2" }); out.push(row); }
       row.append(el);
@@ -483,6 +593,7 @@ function renderFields(fields, obj, onChange) {
       out.push(el);
     }
   }
+  refresh();
   return out;
 }
 
@@ -492,8 +603,57 @@ function renderFields(fields, obj, onChange) {
 const isWebUrl = (v) => /^(https?:\/\/\S+|mailto:\S+|tel:\S+)$/i.test(v);
 const isPathOrUrl = (v) => isWebUrl(v) || (!/^[a-z][a-z0-9+.-]*:/i.test(v) && !/\s/.test(v));
 
+// Memeriksa urutan Riwayat (Git Graph) dengan cara yang sama seperti website menggambarnya
+function validateGraph(rows, errs) {
+  if (!rows?.length) return;
+  const open = new Set();
+  const used = new Set();
+  const at = (i) => `Riwayat (Git Graph) #${i + 1}`;
+  const push = (i, msg) => errs.push({ section: "riwayat", msg: `${at(i)}: ${msg}` });
+  rows.forEach((r, i) => {
+    const b = (r.cabang || "main").trim();
+    const p = (r.induk || "main").trim();
+    if (r.aksi === "head") {
+      if (i !== rows.length - 1) push(i, "HEAD harus berada di baris terakhir.");
+      return;
+    }
+    if (r.aksi === "cabang") {
+      if (!r.cabang?.trim()) return push(i, "\"Nama cabang\" wajib diisi.");
+      if (open.size && !open.has(p)) push(i, `cabang induk "${p}" belum dibuat atau sudah di-merge.`);
+      if (open.has(b)) push(i, `cabang "${b}" sudah ada dan masih terbuka.`);
+      if (r.tutupInduk) open.delete(p);
+      open.add(b);
+      return;
+    }
+    if (r.aksi === "merge") {
+      if (!open.has(b)) push(i, `cabang "${b}" tidak sedang terbuka, jadi tidak bisa di-merge.`);
+      if (!open.has(p)) push(i, `cabang tujuan "${p}" tidak sedang terbuka.`);
+      if (b === p) push(i, "cabang tidak bisa di-merge ke dirinya sendiri.");
+      open.delete(b);
+      return;
+    }
+    // commit
+    if (open.size && !open.has(b)) push(i, `cabang "${b}" belum dibuat atau sudah di-merge.`);
+    open.add(b);
+    if (!r.tautan && !r.teks?.trim()) push(i, "pilih isi di \"Tampilkan isi dari\" atau tulis teks.");
+    if (r.tautan) {
+      const [kind, ...rest] = r.tautan.split(":");
+      const key = rest.join(":");
+      const found = {
+        pengalaman: () => data.pengalaman?.some((x) => x.posisi === key),
+        proyek: () => data.proyek?.some((x) => x.judul === key),
+        pendidikan: () => data.pendidikan?.some((x) => x.institusi === key),
+      }[kind]?.();
+      if (!found) push(i, `isi yang ditautkan ("${key}") sudah tidak ada. Pilih ulang.`);
+      if (kind === "pengalaman" && used.has(r.tautan)) push(i, `pengalaman "${key}" sudah dipakai di baris lain.`);
+      used.add(r.tautan);
+    }
+  });
+}
+
 function validateFields(fields, obj, where, section, errs) {
   for (const f of fields) {
+    if (f.when && !f.when(obj)) continue;
     const v = obj?.[f.key];
     const str = typeof v === "string" ? v.trim() : "";
     if (f.required && ["text", "textarea", "url"].includes(f.type) && !str) {
@@ -516,6 +676,7 @@ function validate() {
     if (s.kind === "object") validateFields(s.fields, data[s.key], s.title, s.key, errs);
     else (data[s.key] || []).forEach((it, i) => validateFields(s.fields, it, `${s.title} #${i + 1}`, s.key, errs));
   }
+  validateGraph(data.riwayat, errs);
   return errs;
 }
 

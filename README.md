@@ -1,12 +1,17 @@
-# Portofolio IT Developer — Ahmad Jazil Faiz
+# Portofolio Software Engineer — Ahmad Jazil Faiz
 
 Website portofolio pribadi yang dibuat dengan HTML, CSS, dan JavaScript murni (tanpa framework).
 
+**Live:** https://my-portofolio-ahmds20s-projects.vercel.app
+
 ## Fitur
-- Tampilan responsif (desktop & mobile)
-- Dark mode dan light mode (pilihan tersimpan di browser)
-- Bagian Tentang, Pengalaman, Proyek, Keahlian, Pendidikan & Sertifikasi, serta Kontak
-- Link sertifikasi yang dapat diklik dan CV yang dapat diunduh
+- Tampilan responsif (desktop & mobile), tema gelap dan terang
+- Diagram arsitektur (Frontend → API → Data → Ops) di bagian atas
+- Panel *trace* yang menyorot lapisan yang dipakai tiap proyek
+- Tabel "Where I have used what" yang dibuat otomatis dari stack tiap proyek
+- Riwayat kerja dalam bentuk git graph (cabang dan merge)
+- Efek stabilo untuk frasa yang diapit `*bintang*`
+- Semua konten diedit lewat halaman admin, tanpa menyentuh kode
 
 ## Struktur
 ```
@@ -32,8 +37,10 @@ Website portofolio pribadi yang dibuat dengan HTML, CSS, dan JavaScript murni (t
    - Buat di https://github.com/settings/personal-access-tokens/new
    - *Repository access*: hanya repo ini
    - *Permissions → Contents*: **Read and write**
-3. Edit bagian mana pun (Profil, Statistik, Tentang, Pengalaman, Proyek, Keahlian, Pendidikan, Sertifikasi, Kontak).
+3. Edit bagian mana pun (Profil, Diagram Arsitektur, Statistik, Tentang, Pengalaman, Riwayat (Git Graph),
+   Proyek, Keahlian, Pendidikan, Sertifikasi, Kontak).
    Foto profil dan CV bisa langsung diunggah dari dashboard (maks. 5 MB).
+   Pengalaman baru baru tampil di website setelah ditambahkan sebagai *Commit* di Riwayat (Git Graph).
 4. Klik **Pratinjau** untuk melihat hasil sebelum dipublikasikan.
 5. Klik **Simpan & Publikasikan** (atau `Ctrl+S`). Admin membuat commit ke repo,
    lalu Vercel otomatis deploy ulang. Website terupdate dalam ±1 menit.
@@ -48,8 +55,10 @@ python -m http.server 8000
 ```
 Lalu buka http://localhost:8000.
 
+Setiap simpan dari admin menjadi commit di GitHub, jadi jalankan `git pull` sebelum mengubah file di laptop.
+
 ## Link
-- Portofolio IT Developer: https://my-portofolio-gkwp3vgnw-ahmds20s-projects.vercel.app/
-- Portofolio Data Science: https://my-portfolio-drab-three-13.vercel.app/
+- Website: https://my-portofolio-ahmds20s-projects.vercel.app
+- Admin: https://my-portofolio-ahmds20s-projects.vercel.app/admin/login.html
 - LinkedIn: https://www.linkedin.com/in/ahmad-jazil-faiz-956788245/
 - GitHub: https://github.com/Ahmds20

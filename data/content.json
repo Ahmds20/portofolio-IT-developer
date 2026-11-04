@@ -29,10 +29,10 @@
     }
   ],
   "tentang": {
-    "judul": "Membangun sistem yang andal, dari kode hingga produksi",
+    "judul": "Get to Know Me",
     "paragraf": [
-      "Saya lulusan Informatika Universitas Gunadarma dengan minat pada pengembangan perangkat lunak dan sistem teknologi informasi. Pengalaman saya mencakup pengembangan aplikasi, pengujian sistem, troubleshooting, integrasi aplikasi, deployment, serta monitoring melalui proyek akademik, program intensif, dan magang.",
-      "Saya terbiasa menggunakan Python, HTML, CSS, JavaScript, SQL, Linux, dan Git, serta berbagai tools pengembangan dan monitoring. Saya memiliki kemampuan analitis dan problem solving yang baik, adaptif terhadap teknologi baru, dan mampu bekerja secara kolaboratif dalam tim."
+      "I am an Informatics graduate from Gunadarma University with a strong interest in Full Stack Development and Software Engineering. I have hands-on experience developing web applications, building frontend interfaces, implementing backend services, designing databases, and integrating APIs.",
+      "Through academic projects and professional experience, I have worked with technologies such as JavaScript, React, Django, Python, Flask, FastAPI, and PostgreSQL. I also have experience in software testing, deployment, application monitoring, cloud computing, and machine learning."
     ]
   },
   "pengalaman": [

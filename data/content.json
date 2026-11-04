@@ -1,0 +1,171 @@
+{
+  "profil": {
+    "nama": "Ahmad Jazil Faiz",
+    "peran": "IT Developer · Software & Web Development",
+    "ringkasan": "Lulusan Informatika Universitas Gunadarma dengan pengalaman di pengembangan aplikasi web, pengujian sistem, deployment, dan monitoring, serta penerapan machine learning pada sistem nyata.",
+    "terbukaKerja": true,
+    "teksStatus": "Terbuka untuk peluang kerja",
+    "lokasi": "Jagakarsa, Jakarta Selatan",
+    "foto": "assets/img/profile.jpg",
+    "cv": "assets/docs/CV-Ahmad-Jazil-Faiz.pdf",
+    "metaDeskripsi": "Portofolio Ahmad Jazil Faiz, IT Developer lulusan Informatika Universitas Gunadarma."
+  },
+  "statistik": [
+    { "nilai": "3.80", "label": "IPK dari 4.00" },
+    { "nilai": "99,89%", "label": "Akurasi deteksi DDoS" },
+    { "nilai": "41.188", "label": "Data diproses PRISM" },
+    { "nilai": "12", "label": "Sertifikasi" }
+  ],
+  "tentang": {
+    "judul": "Membangun sistem yang andal, dari kode hingga produksi",
+    "paragraf": [
+      "Saya lulusan Informatika Universitas Gunadarma dengan minat pada pengembangan perangkat lunak dan sistem teknologi informasi. Pengalaman saya mencakup pengembangan aplikasi, pengujian sistem, troubleshooting, integrasi aplikasi, deployment, serta monitoring melalui proyek akademik, program intensif, dan magang.",
+      "Saya terbiasa menggunakan Python, HTML, CSS, JavaScript, SQL, Linux, dan Git, serta berbagai tools pengembangan dan monitoring. Saya memiliki kemampuan analitis dan problem solving yang baik, adaptif terhadap teknologi baru, dan mampu bekerja secara kolaboratif dalam tim."
+    ]
+  },
+  "pengalaman": [
+    {
+      "periode": "Mar 2025 – Agu 2025",
+      "posisi": "Frontend Web Developer Intern",
+      "organisasi": "PT Cronos Studio Indonesia",
+      "poin": [
+        "Berkontribusi dalam pengembangan dan pemeliharaan website rekrutmen berbasis Drupal 10 di lingkungan produksi.",
+        "Mengembangkan fitur front-end responsif dengan HTML, CSS, JavaScript, dan Twig yang konsisten di berbagai ukuran layar dan browser.",
+        "Melakukan cross-browser dan functional testing untuk meningkatkan keandalan dan usability aplikasi.",
+        "Berkolaborasi dengan tim desain dan back-end, serta mengelola task harian menggunakan Jira."
+      ],
+      "tag": ["Drupal 10", "Twig", "JavaScript", "CSS", "Jira"]
+    },
+    {
+      "periode": "Agu 2025 – Jan 2026",
+      "posisi": "Machine Learning Cohort",
+      "organisasi": "Dicoding Academy Indonesia · in association with Accenture",
+      "poin": [
+        "Program pelatihan intensif dengan pengalaman langsung dalam pengembangan sistem, pengujian, troubleshooting, deployment, monitoring, dan dokumentasi teknis.",
+        "Mengembangkan PRISM, sistem prediksi berbasis web (AUC 0,81) yang mengidentifikasi 4.640 potential leads dari 41.188 data pelanggan.",
+        "Melakukan deployment dan monitoring di AWS dengan Prometheus & Grafana, serta menerapkan Docker dan GitHub Actions dalam workflow."
+      ],
+      "tag": ["Python", "AWS", "Docker", "GitHub Actions", "Grafana"]
+    }
+  ],
+  "proyek": [
+    {
+      "unggulan": true,
+      "ikon": "shield",
+      "label": "Proyek Akhir · Universitas Gunadarma",
+      "periode": "Feb 2026 – Sep 2026",
+      "judul": "Sistem Deteksi DDoS & Mitigasi Otomatis Real-time",
+      "deskripsi": "Sistem deteksi serangan DDoS secara real-time di Linux menggunakan CICFlowMeter dan Random Forest. Dilengkapi automated IP blocking via iptables untuk respons otomatis terhadap sumber serangan, serta dashboard monitoring trafik, serangan terdeteksi, dan alert.",
+      "metrik": [
+        { "nilai": "99,89%", "label": "Accuracy" },
+        { "nilai": "99,90%", "label": "Recall" },
+        { "nilai": "99,94%", "label": "F1-score" }
+      ],
+      "tag": ["Python", "Random Forest", "iptables", "Flask", "Prometheus", "Grafana"],
+      "linkKode": "",
+      "linkDemo": ""
+    },
+    {
+      "unggulan": false,
+      "ikon": "chart",
+      "label": "Dicoding × Accenture",
+      "periode": "Agu 2025 – Jan 2026",
+      "judul": "PRISM — Predictive Ranking & Insight Scoring Model",
+      "deskripsi": "Sistem prediksi berbasis web yang memproses 41.188 data pelanggan dan mengidentifikasi 4.640 potential leads. Di-deploy di AWS dengan monitoring Prometheus & Grafana.",
+      "metrik": [
+        { "nilai": "0,81", "label": "AUC" },
+        { "nilai": "4.640", "label": "Leads" }
+      ],
+      "tag": ["XGBoost", "scikit-learn", "AWS", "Docker", "GitHub Actions"],
+      "linkKode": "",
+      "linkDemo": ""
+    },
+    {
+      "unggulan": false,
+      "ikon": "cart",
+      "label": "Proyek Akademik",
+      "periode": "Sep 2024 – Jan 2025",
+      "judul": "E-commerce Coffee Shop",
+      "deskripsi": "Website e-commerce full-stack untuk bisnis kedai kopi dengan fitur autentikasi, keranjang belanja, pengelolaan pesanan, dan integrasi pembayaran. Frontend, backend, dan database terintegrasi end-to-end.",
+      "metrik": [],
+      "tag": ["Django", "React", "Tailwind CSS", "PostgreSQL"],
+      "linkKode": "",
+      "linkDemo": ""
+    },
+    {
+      "unggulan": false,
+      "ikon": "network",
+      "label": "Proyek Akademik",
+      "periode": "Jan 2025 – Mar 2025",
+      "judul": "Network Topology Design & Configuration",
+      "deskripsi": "Desain dan konfigurasi topologi WAN multi-subnet di Cisco Packet Tracer, meliputi IP addressing, static routing, dan connectivity testing hingga tercapai end-to-end connectivity.",
+      "metrik": [],
+      "tag": ["Cisco Packet Tracer", "Static Routing", "Subnetting", "Cisco IOS"],
+      "linkKode": "",
+      "linkDemo": ""
+    }
+  ],
+  "keahlian": [
+    { "kategori": "Frontend", "tag": ["HTML", "CSS", "JavaScript", "React", "Tailwind CSS"] },
+    { "kategori": "Backend", "tag": ["Python", "Django", "Flask", "REST API"] },
+    { "kategori": "Database", "tag": ["PostgreSQL", "SQL", "SQLite", "MySQL", "MongoDB"] },
+    { "kategori": "Tools & DevOps", "tag": ["Git/GitHub", "Docker", "GitHub Actions", "Linux", "SSH"] },
+    { "kategori": "Cloud Computing", "tag": ["AWS", "Cloud Deployment", "Cloud Monitoring", "AWS re/Start Graduate"] },
+    { "kategori": "Testing & Monitoring", "tag": ["Functional Testing", "System Testing", "Troubleshooting", "Prometheus", "Grafana"] },
+    { "kategori": "Networking", "tag": ["TCP/IP", "IP Addressing", "Subnetting", "LAN/WAN", "Static Routing"] },
+    { "kategori": "Machine Learning", "tag": ["scikit-learn", "XGBoost", "Random Forest"] },
+    { "kategori": "Soft Skills", "tag": ["Problem Solving", "Analytical Thinking", "Attention to Detail", "Team Collaboration"] }
+  ],
+  "pendidikan": [
+    {
+      "institusi": "Universitas Gunadarma",
+      "jurusan": "S1 Informatika",
+      "periode": "Sep 2022 – Agu 2026",
+      "nilai": "IPK 3.80 / 4.00",
+      "deskripsi": "Mempelajari pemrograman, algoritma, jaringan komputer, dan dasar keamanan informasi. Berpengalaman mengembangkan aplikasi web dengan Django, React, dan PostgreSQL, serta menyelesaikan proyek akhir sistem deteksi DDoS dan mitigasi otomatis secara real-time."
+    }
+  ],
+  "sertifikasi": [
+    {
+      "penerbit": "Orbit Future Academy",
+      "periode": "Agu – Sep 2026",
+      "item": [
+        { "nama": "AWS re/Start Graduate", "url": "https://www.credly.com/badges/8242b035-b5fb-4111-b411-050e08291036/public_url" }
+      ]
+    },
+    {
+      "penerbit": "Universitas Gunadarma",
+      "periode": "Feb 2025 – Jun 2026",
+      "item": [
+        { "nama": "Advanced Database Systems", "url": "https://drive.google.com/file/d/1NTmFYGc4vMSnbFoEazwHnNgPlgcLvulC/view?usp=sharing" },
+        { "nama": "Oracle For Intermediate", "url": "https://drive.google.com/file/d/11QfLjUr6qShkJbFeNOu58IWJz-HAtdFd/view?usp=sharing" },
+        { "nama": "SQL Server for Intermediate", "url": "https://drive.google.com/file/d/10Iyzwb3wk_gxAEFOaexI-Zanx8SUVtiV/view?usp=sharing" }
+      ]
+    },
+    {
+      "penerbit": "Dicoding Academy Indonesia",
+      "periode": "Agu – Des 2025",
+      "item": [
+        { "nama": "Getting Started with Programming for Software Development", "url": "https://www.dicoding.com/certificates/1RXYQMRJKZVM" },
+        { "nama": "Programming Logic 101", "url": "https://www.dicoding.com/certificates/RVZKGK4RQXD5" },
+        { "nama": "Git & GitHub Fundamentals", "url": "https://www.dicoding.com/certificates/1RXYQO42QZVM" },
+        { "nama": "AI Fundamentals", "url": "https://www.dicoding.com/certificates/6RPNG1558Z2M" },
+        { "nama": "Python Programming Fundamentals", "url": "https://www.dicoding.com/certificates/L4PQ21V12ZO1" },
+        { "nama": "Machine Learning for Beginners", "url": "https://www.dicoding.com/certificates/07Z6J0Y7JXQR" },
+        { "nama": "Deep Learning Fundamentals", "url": "https://www.dicoding.com/certificates/GRX5JM29YX0M" },
+        { "nama": "Building Machine Learning Systems", "url": "https://www.dicoding.com/certificates/MRZM67M6RPYQ" }
+      ]
+    }
+  ],
+  "kontak": {
+    "judul": "Mari berdiskusi",
+    "pengantar": "Saya terbuka untuk peluang kerja sebagai IT Developer, Software Engineer, atau posisi terkait. Silakan hubungi saya melalui salah satu kanal berikut.",
+    "tautan": [
+      { "ikon": "mail", "label": "Email", "teks": "ahmadjazilfaiz24@gmail.com", "url": "mailto:ahmadjazilfaiz24@gmail.com", "tampilDiHero": true },
+      { "ikon": "phone", "label": "Telepon / WhatsApp", "teks": "0812-8798-9375", "url": "https://wa.me/6281287989375", "tampilDiHero": false },
+      { "ikon": "linkedin", "label": "LinkedIn", "teks": "Ahmad Jazil Faiz", "url": "https://www.linkedin.com/in/ahmad-jazil-faiz-956788245/", "tampilDiHero": true },
+      { "ikon": "github", "label": "GitHub", "teks": "github.com/Ahmds20", "url": "https://github.com/Ahmds20", "tampilDiHero": true },
+      { "ikon": "chart", "label": "Portofolio Data Science", "teks": "my-portfolio-drab-three-13.vercel.app", "url": "https://my-portfolio-drab-three-13.vercel.app/", "tampilDiHero": false }
+    ]
+  }
+}

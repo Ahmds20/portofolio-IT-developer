@@ -5,17 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ahmad Jazil Faiz — IT Developer</title>
   <meta name="description" content="Portofolio Ahmad Jazil Faiz, IT Developer lulusan Informatika Universitas Gunadarma." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Ahmad Jazil Faiz — IT Developer" />
+  <meta property="og:description" content="Portofolio Ahmad Jazil Faiz, IT Developer lulusan Informatika Universitas Gunadarma." />
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
   <script>
     // Terapkan tema sebelum halaman dirender agar tidak berkedip
     (function () {
-      var t = localStorage.getItem("theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      document.documentElement.dataset.theme = t;
+      var t;
+      try { t = localStorage.getItem("theme"); } catch (e) {}
+      document.documentElement.dataset.theme = t || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
     })();
   </script>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <!-- Kumpulan ikon SVG -->
@@ -37,6 +42,10 @@
     <symbol id="i-network" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="16" y="16" width="6" height="6" rx="1"/><path d="M5 16v-3h14v3M12 8v5"/></symbol>
     <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.5 12.9 17 22l-5-3-5 3 1.5-9.1"/></symbol>
     <symbol id="i-cap" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></symbol>
+    <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5"/><path d="M3 12c0 1.7 4 3 9 3s9-1.3 9-3"/></symbol>
+    <symbol id="i-mobile" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></symbol>
   </svg>
 
   <header class="nav">
@@ -55,294 +64,92 @@
           <svg class="icon icon-sun"><use href="#i-sun"/></svg>
           <svg class="icon icon-moon"><use href="#i-moon"/></svg>
         </button>
-        <a href="cv.pdf" class="btn btn-sm nav-cv" download>Unduh CV</a>
+        <a href="#" class="btn btn-sm nav-cv" data-bind="cv" download>Unduh CV</a>
         <button class="icon-btn nav-toggle" aria-label="Buka menu"><svg class="icon"><use href="#i-menu"/></svg></button>
       </div>
     </div>
   </header>
 
+  <!-- Seluruh konten diisi oleh js/script.js dari data/content.json.
+       Edit konten lewat halaman /admin, bukan di file ini. -->
   <main>
-    <!-- HERO -->
     <section id="hero" class="hero">
       <div class="container hero-inner">
         <div class="hero-text">
-          <span class="badge"><span class="dot"></span>Terbuka untuk peluang kerja</span>
-          <h1>Ahmad Jazil Faiz</h1>
-          <p class="hero-role">IT Developer · Software &amp; Web Development</p>
-          <p class="lead">
-            Lulusan Informatika Universitas Gunadarma dengan pengalaman di pengembangan aplikasi web,
-            pengujian sistem, deployment, dan monitoring, serta penerapan machine learning pada sistem nyata.
-          </p>
+          <span class="badge" data-bind="status" hidden><span class="dot"></span><span data-bind="statusText"></span></span>
+          <h1 data-bind="nama"></h1>
+          <p class="hero-role" data-bind="peran"></p>
+          <p class="lead" data-bind="ringkasan"></p>
           <div class="hero-cta">
             <a href="#proyek" class="btn">Lihat Proyek</a>
-            <a href="cv.pdf" class="btn btn-outline" download><svg class="icon"><use href="#i-download"/></svg>Unduh CV</a>
+            <a href="#" class="btn btn-outline" data-bind="cv" download><svg class="icon"><use href="#i-download"/></svg>Unduh CV</a>
           </div>
-          <div class="hero-social">
-            <a href="https://www.linkedin.com/in/ahmad-jazil-faiz-956788245/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="icon"><use href="#i-linkedin"/></svg></a>
-            <a href="https://github.com/Ahmds20" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon"><use href="#i-github"/></svg></a>
-            <a href="mailto:ahmadjazilfaiz24@gmail.com" aria-label="Email"><svg class="icon"><use href="#i-mail"/></svg></a>
-            <span class="hero-loc"><svg class="icon"><use href="#i-pin"/></svg>Jagakarsa, Jakarta Selatan</span>
-          </div>
+          <div class="hero-social" data-list="heroSocial"></div>
         </div>
         <div class="hero-photo">
-          <div class="photo-frame">
-            <img src="1763309756402.jpg" alt="Foto Ahmad Jazil Faiz" />
-          </div>
+          <div class="photo-frame"><img data-bind="foto" alt="" /></div>
         </div>
       </div>
-
-      <div class="container">
-        <div class="stats">
-          <div class="stat"><strong>3.80</strong><span>IPK dari 4.00</span></div>
-          <div class="stat"><strong>99,89%</strong><span>Akurasi deteksi DDoS</span></div>
-          <div class="stat"><strong>41.188</strong><span>Data diproses PRISM</span></div>
-          <div class="stat"><strong>12</strong><span>Sertifikasi</span></div>
-        </div>
-      </div>
+      <div class="container"><div class="stats" data-list="statistik"></div></div>
     </section>
 
-    <!-- TENTANG -->
     <section id="tentang" class="section">
       <div class="container about-grid">
         <div>
           <p class="eyebrow">Tentang Saya</p>
-          <h2 class="section-title">Membangun sistem yang andal, dari kode hingga produksi</h2>
+          <h2 class="section-title" data-bind="tentangJudul"></h2>
         </div>
-        <div class="about-text">
-          <p>
-            Saya lulusan Informatika Universitas Gunadarma dengan minat pada pengembangan perangkat lunak dan
-            sistem teknologi informasi. Pengalaman saya mencakup pengembangan aplikasi, pengujian sistem,
-            troubleshooting, integrasi aplikasi, deployment, serta monitoring melalui proyek akademik,
-            program intensif, dan magang.
-          </p>
-          <p>
-            Saya terbiasa menggunakan Python, HTML, CSS, JavaScript, SQL, Linux, dan Git, serta berbagai tools
-            pengembangan dan monitoring. Saya memiliki kemampuan analitis dan problem solving yang baik,
-            adaptif terhadap teknologi baru, dan mampu bekerja secara kolaboratif dalam tim.
-          </p>
-        </div>
+        <div class="about-text" data-list="tentang"></div>
       </div>
     </section>
 
-    <!-- PENGALAMAN -->
     <section id="pengalaman" class="section section-alt">
       <div class="container">
         <p class="eyebrow">Pengalaman</p>
         <h2 class="section-title">Riwayat Pengalaman</h2>
-        <div class="timeline">
-          <article class="timeline-item reveal">
-            <div class="timeline-date">Mar 2025 – Agu 2025</div>
-            <div class="timeline-body">
-              <h3>Frontend Web Developer Intern</h3>
-              <p class="org">PT Cronos Studio Indonesia</p>
-              <ul>
-                <li>Berkontribusi dalam pengembangan dan pemeliharaan website rekrutmen berbasis Drupal 10 di lingkungan produksi.</li>
-                <li>Mengembangkan fitur front-end responsif dengan HTML, CSS, JavaScript, dan Twig yang konsisten di berbagai ukuran layar dan browser.</li>
-                <li>Melakukan cross-browser dan functional testing untuk meningkatkan keandalan dan usability aplikasi.</li>
-                <li>Berkolaborasi dengan tim desain dan back-end, serta mengelola task harian menggunakan Jira.</li>
-              </ul>
-              <div class="tags"><span>Drupal 10</span><span>Twig</span><span>JavaScript</span><span>CSS</span><span>Jira</span></div>
-            </div>
-          </article>
-
-          <article class="timeline-item reveal">
-            <div class="timeline-date">Agu 2025 – Jan 2026</div>
-            <div class="timeline-body">
-              <h3>Machine Learning Cohort</h3>
-              <p class="org">Dicoding Academy Indonesia · in association with Accenture</p>
-              <ul>
-                <li>Program pelatihan intensif dengan pengalaman langsung dalam pengembangan sistem, pengujian, troubleshooting, deployment, monitoring, dan dokumentasi teknis.</li>
-                <li>Mengembangkan PRISM, sistem prediksi berbasis web (AUC 0,81) yang mengidentifikasi 4.640 potential leads dari 41.188 data pelanggan.</li>
-                <li>Melakukan deployment dan monitoring di AWS dengan Prometheus &amp; Grafana, serta menerapkan Docker dan GitHub Actions dalam workflow.</li>
-              </ul>
-              <div class="tags"><span>Python</span><span>AWS</span><span>Docker</span><span>GitHub Actions</span><span>Grafana</span></div>
-            </div>
-          </article>
-        </div>
+        <div class="timeline" data-list="pengalaman"></div>
       </div>
     </section>
 
-    <!-- PROYEK -->
     <section id="proyek" class="section">
       <div class="container">
         <p class="eyebrow">Portofolio</p>
         <h2 class="section-title">Proyek Unggulan</h2>
-        <div class="projects">
-          <article class="project-card featured reveal">
-            <div class="project-head">
-              <span class="project-icon"><svg class="icon"><use href="#i-shield"/></svg></span>
-              <div>
-                <span class="project-label">Proyek Akhir · Universitas Gunadarma</span>
-                <span class="date">Feb 2026 – Sep 2026</span>
-              </div>
-            </div>
-            <h3>Sistem Deteksi DDoS &amp; Mitigasi Otomatis Real-time</h3>
-            <p>
-              Sistem deteksi serangan DDoS secara real-time di Linux menggunakan CICFlowMeter dan Random Forest.
-              Dilengkapi automated IP blocking via iptables untuk respons otomatis terhadap sumber serangan, serta
-              dashboard monitoring trafik, serangan terdeteksi, dan alert.
-            </p>
-            <div class="metrics">
-              <div><strong>99,89%</strong><span>Accuracy</span></div>
-              <div><strong>99,90%</strong><span>Recall</span></div>
-              <div><strong>99,94%</strong><span>F1-score</span></div>
-            </div>
-            <div class="tags"><span>Python</span><span>Random Forest</span><span>iptables</span><span>Flask</span><span>Prometheus</span><span>Grafana</span></div>
-          </article>
-
-          <article class="project-card reveal">
-            <div class="project-head">
-              <span class="project-icon"><svg class="icon"><use href="#i-chart"/></svg></span>
-              <div>
-                <span class="project-label">Dicoding × Accenture</span>
-                <span class="date">Agu 2025 – Jan 2026</span>
-              </div>
-            </div>
-            <h3>PRISM — Predictive Ranking &amp; Insight Scoring Model</h3>
-            <p>
-              Sistem prediksi berbasis web yang memproses 41.188 data pelanggan dan mengidentifikasi 4.640
-              potential leads. Di-deploy di AWS dengan monitoring Prometheus &amp; Grafana.
-            </p>
-            <div class="metrics">
-              <div><strong>0,81</strong><span>AUC</span></div>
-              <div><strong>4.640</strong><span>Leads</span></div>
-            </div>
-            <div class="tags"><span>XGBoost</span><span>scikit-learn</span><span>AWS</span><span>Docker</span><span>GitHub Actions</span></div>
-          </article>
-
-          <article class="project-card reveal">
-            <div class="project-head">
-              <span class="project-icon"><svg class="icon"><use href="#i-cart"/></svg></span>
-              <div>
-                <span class="project-label">Proyek Akademik</span>
-                <span class="date">Sep 2024 – Jan 2025</span>
-              </div>
-            </div>
-            <h3>E-commerce Coffee Shop</h3>
-            <p>
-              Website e-commerce full-stack untuk bisnis kedai kopi dengan fitur autentikasi, keranjang belanja,
-              pengelolaan pesanan, dan integrasi pembayaran. Frontend, backend, dan database terintegrasi end-to-end.
-            </p>
-            <div class="tags"><span>Django</span><span>React</span><span>Tailwind CSS</span><span>PostgreSQL</span></div>
-          </article>
-
-          <article class="project-card reveal">
-            <div class="project-head">
-              <span class="project-icon"><svg class="icon"><use href="#i-network"/></svg></span>
-              <div>
-                <span class="project-label">Proyek Akademik</span>
-                <span class="date">Jan 2025 – Mar 2025</span>
-              </div>
-            </div>
-            <h3>Network Topology Design &amp; Configuration</h3>
-            <p>
-              Desain dan konfigurasi topologi WAN multi-subnet di Cisco Packet Tracer, meliputi IP addressing,
-              static routing, dan connectivity testing hingga tercapai end-to-end connectivity.
-            </p>
-            <div class="tags"><span>Cisco Packet Tracer</span><span>Static Routing</span><span>Subnetting</span><span>Cisco IOS</span></div>
-          </article>
-        </div>
+        <div class="projects" data-list="proyek"></div>
       </div>
     </section>
 
-    <!-- KEAHLIAN -->
     <section id="skills" class="section section-alt">
       <div class="container">
         <p class="eyebrow">Keahlian</p>
         <h2 class="section-title">Teknologi &amp; Kompetensi</h2>
-        <div class="skills-grid">
-          <div class="skill-group reveal"><h4>Frontend</h4><div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>React</span><span>Tailwind CSS</span></div></div>
-          <div class="skill-group reveal"><h4>Backend</h4><div class="tags"><span>Python</span><span>Django</span><span>Flask</span><span>REST API</span></div></div>
-          <div class="skill-group reveal"><h4>Database</h4><div class="tags"><span>PostgreSQL</span><span>SQL</span><span>SQLite</span><span>MySQL</span><span>MongoDB</span></div></div>
-          <div class="skill-group reveal"><h4>Tools &amp; DevOps</h4><div class="tags"><span>Git/GitHub</span><span>Docker</span><span>GitHub Actions</span><span>Linux</span><span>SSH</span></div></div>
-          <div class="skill-group reveal"><h4>Cloud Computing</h4><div class="tags"><span>AWS</span><span>Cloud Deployment</span><span>Cloud Monitoring</span><span>AWS re/Start Graduate</span></div></div>
-          <div class="skill-group reveal"><h4>Testing &amp; Monitoring</h4><div class="tags"><span>Functional Testing</span><span>System Testing</span><span>Troubleshooting</span><span>Prometheus</span><span>Grafana</span></div></div>
-          <div class="skill-group reveal"><h4>Networking</h4><div class="tags"><span>TCP/IP</span><span>IP Addressing</span><span>Subnetting</span><span>LAN/WAN</span><span>Static Routing</span></div></div>
-          <div class="skill-group reveal"><h4>Machine Learning</h4><div class="tags"><span>scikit-learn</span><span>XGBoost</span><span>Random Forest</span></div></div>
-          <div class="skill-group reveal"><h4>Soft Skills</h4><div class="tags"><span>Problem Solving</span><span>Analytical Thinking</span><span>Attention to Detail</span><span>Team Collaboration</span></div></div>
-        </div>
+        <div class="skills-grid" data-list="keahlian"></div>
       </div>
     </section>
 
-    <!-- PENDIDIKAN & SERTIFIKASI -->
     <section id="pendidikan" class="section">
       <div class="container">
         <p class="eyebrow">Pendidikan &amp; Sertifikasi</p>
         <h2 class="section-title">Latar Belakang Akademik</h2>
         <div class="edu-grid">
-          <article class="edu-card reveal">
-            <span class="project-icon"><svg class="icon"><use href="#i-cap"/></svg></span>
-            <h3>Universitas Gunadarma</h3>
-            <p class="org">S1 Informatika</p>
-            <div class="edu-meta"><span class="date">Sep 2022 – Agu 2026</span><span class="gpa">IPK 3.80 / 4.00</span></div>
-            <p class="edu-desc">
-              Mempelajari pemrograman, algoritma, jaringan komputer, dan dasar keamanan informasi.
-              Berpengalaman mengembangkan aplikasi web dengan Django, React, dan PostgreSQL, serta
-              menyelesaikan proyek akhir sistem deteksi DDoS dan mitigasi otomatis secara real-time.
-            </p>
-          </article>
+          <div class="edu-list" data-list="pendidikan"></div>
           <div class="certs reveal">
             <div class="certs-head"><span class="project-icon"><svg class="icon"><use href="#i-award"/></svg></span><h3>Sertifikasi</h3></div>
-            <div class="cert-group">
-              <h4>Orbit Future Academy <span class="date">Agu – Sep 2026</span></h4>
-              <ul><li><a href="https://www.credly.com/badges/8242b035-b5fb-4111-b411-050e08291036/public_url" target="_blank" rel="noopener">AWS re/Start Graduate</a></li></ul>
-            </div>
-            <div class="cert-group">
-              <h4>Universitas Gunadarma <span class="date">Feb 2025 – Jun 2026</span></h4>
-              <ul>
-                <li><a href="https://drive.google.com/file/d/1NTmFYGc4vMSnbFoEazwHnNgPlgcLvulC/view?usp=sharing" target="_blank" rel="noopener">Advanced Database Systems</a></li>
-                <li><a href="https://drive.google.com/file/d/11QfLjUr6qShkJbFeNOu58IWJz-HAtdFd/view?usp=sharing" target="_blank" rel="noopener">Oracle For Intermediate</a></li>
-                <li><a href="https://drive.google.com/file/d/10Iyzwb3wk_gxAEFOaexI-Zanx8SUVtiV/view?usp=sharing" target="_blank" rel="noopener">SQL Server for Intermediate</a></li>
-              </ul>
-            </div>
-            <div class="cert-group">
-              <h4>Dicoding Academy Indonesia <span class="date">Agu – Des 2025</span></h4>
-              <ul>
-                <li><a href="https://www.dicoding.com/certificates/1RXYQMRJKZVM" target="_blank" rel="noopener">Getting Started with Programming for Software Development</a></li>
-                <li><a href="https://www.dicoding.com/certificates/RVZKGK4RQXD5" target="_blank" rel="noopener">Programming Logic 101</a></li>
-                <li><a href="https://www.dicoding.com/certificates/1RXYQO42QZVM" target="_blank" rel="noopener">Git &amp; GitHub Fundamentals</a></li>
-                <li><a href="https://www.dicoding.com/certificates/6RPNG1558Z2M" target="_blank" rel="noopener">AI Fundamentals</a></li>
-                <li><a href="https://www.dicoding.com/certificates/L4PQ21V12ZO1" target="_blank" rel="noopener">Python Programming Fundamentals</a></li>
-                <li><a href="https://www.dicoding.com/certificates/07Z6J0Y7JXQR" target="_blank" rel="noopener">Machine Learning for Beginners</a></li>
-                <li><a href="https://www.dicoding.com/certificates/GRX5JM29YX0M" target="_blank" rel="noopener">Deep Learning Fundamentals</a></li>
-                <li><a href="https://www.dicoding.com/certificates/MRZM67M6RPYQ" target="_blank" rel="noopener">Building Machine Learning Systems</a></li>
-              </ul>
-            </div>
+            <div data-list="sertifikasi"></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- KONTAK -->
     <section id="kontak" class="section contact">
       <div class="container">
         <div class="contact-box">
           <div>
             <p class="eyebrow">Kontak</p>
-            <h2 class="section-title">Mari berdiskusi</h2>
-            <p class="contact-lead">
-              Saya terbuka untuk peluang kerja sebagai IT Developer, Software Engineer, atau posisi terkait.
-              Silakan hubungi saya melalui salah satu kanal berikut.
-            </p>
+            <h2 class="section-title" data-bind="kontakJudul"></h2>
+            <p class="contact-lead" data-bind="kontakPengantar"></p>
           </div>
-          <div class="contact-links">
-            <a href="mailto:ahmadjazilfaiz24@gmail.com" class="contact-item">
-              <span class="contact-icon"><svg class="icon"><use href="#i-mail"/></svg></span>
-              <span><small>Email</small>ahmadjazilfaiz24@gmail.com</span>
-            </a>
-            <a href="https://wa.me/6281287989375" target="_blank" rel="noopener" class="contact-item">
-              <span class="contact-icon"><svg class="icon"><use href="#i-phone"/></svg></span>
-              <span><small>Telepon / WhatsApp</small>0812-8798-9375</span>
-            </a>
-            <a href="https://www.linkedin.com/in/ahmad-jazil-faiz-956788245/" target="_blank" rel="noopener" class="contact-item">
-              <span class="contact-icon"><svg class="icon"><use href="#i-linkedin"/></svg></span>
-              <span><small>LinkedIn</small>Ahmad Jazil Faiz</span>
-            </a>
-            <a href="https://github.com/Ahmds20" target="_blank" rel="noopener" class="contact-item">
-              <span class="contact-icon"><svg class="icon"><use href="#i-github"/></svg></span>
-              <span><small>GitHub</small>github.com/Ahmds20</span>
-            </a>
-          </div>
+          <div class="contact-links" data-list="kontak"></div>
         </div>
       </div>
     </section>
@@ -350,11 +157,11 @@
 
   <footer class="footer">
     <div class="container footer-inner">
-      <p>© <span id="year"></span> Ahmad Jazil Faiz</p>
+      <p>© <span id="year"></span> <span data-bind="nama"></span></p>
       <a href="#hero">Kembali ke atas ↑</a>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>

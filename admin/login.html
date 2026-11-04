@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Login Admin — Portofolio</title>
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="admin.css" />
+  <script src="common.js"></script>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+  </svg>
+
+  <main class="login-wrap">
+    <form class="login-card" id="login" novalidate>
+      <div class="login-top">
+        <span class="logo-mark"><svg class="icon"><use href="#i-code"/></svg></span>
+        <button type="button" class="icon-btn theme-toggle" aria-label="Ganti tema terang/gelap" title="Ganti tema">
+          <svg class="icon icon-sun"><use href="#i-sun"/></svg>
+          <svg class="icon icon-moon"><use href="#i-moon"/></svg>
+        </button>
+      </div>
+      <h1>Admin Portofolio</h1>
+      <p>Masuk dengan akun GitHub untuk mengedit konten website. Perubahan disimpan langsung ke repo dan otomatis tayang setelah Vercel selesai deploy.</p>
+
+      <div class="repo-row">
+        <div class="field">
+          <label for="owner">Pemilik repo</label>
+          <input class="input" id="owner" required autocomplete="username" spellcheck="false" />
+        </div>
+        <div class="field">
+          <label for="repo">Nama repo</label>
+          <input class="input" id="repo" required spellcheck="false" />
+        </div>
+      </div>
+      <div class="field">
+        <label for="branch">Branch</label>
+        <input class="input" id="branch" required spellcheck="false" />
+      </div>
+      <div class="field">
+        <label for="token">GitHub token</label>
+        <input class="input" id="token" type="password" required autocomplete="current-password" spellcheck="false" placeholder="github_pat_…" />
+        <span class="hint">Token hanya disimpan di browser ini, tidak dikirim ke mana pun selain GitHub.</span>
+      </div>
+      <label class="check"><input type="checkbox" id="remember" /> Ingat saya di perangkat ini</label>
+
+      <button class="btn" type="submit" id="submit">Masuk</button>
+      <p class="form-error" id="error" role="alert" hidden></p>
+
+      <details class="help">
+        <summary>Cara membuat token GitHub</summary>
+        <ol>
+          <li>Buka <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub → Fine-grained tokens → Generate new token</a>.</li>
+          <li>Isi nama (misal <code>admin-portofolio</code>) dan masa berlaku.</li>
+          <li><b>Repository access:</b> pilih <i>Only select repositories</i> → repo portofolio ini saja.</li>
+          <li><b>Permissions → Repository → Contents:</b> pilih <i>Read and write</i>.</li>
+          <li>Klik <i>Generate token</i>, salin, lalu tempel di atas.</li>
+        </ol>
+        <p style="margin-top:.75rem">Hanya orang yang punya token dengan akses tulis ke repo ini yang bisa mengubah konten.</p>
+      </details>
+    </form>
+  </main>
+
+  <script>
+    const DEFAULTS = { owner: "Ahmds20", repo: "portofolio-IT-developer", branch: "main" };
+    const $ = (id) => document.getElementById(id);
+
+    if (Admin.getSession()) location.replace("index.html");
+
+    const cfg = { ...DEFAULTS, ...Admin.getConfig() };
+    $("owner").value = cfg.owner;
+    $("repo").value = cfg.repo;
+    $("branch").value = cfg.branch;
+    $("token").focus();
+
+    document.querySelector(".theme-toggle").addEventListener("click", Admin.toggleTheme);
+
+    $("login").addEventListener("submit", async (ev) => {
+      ev.preventDefault();
+      const s = {
+        owner: $("owner").value.trim(),
+        repo: $("repo").value.trim(),
+        branch: $("branch").value.trim(),
+        token: $("token").value.trim(),
+      };
+      const err = $("error");
+      err.hidden = true;
+      if (!s.owner || !s.repo || !s.branch || !s.token) {
+        err.textContent = "Semua kolom wajib diisi.";
+        err.hidden = false;
+        return;
+      }
+
+      const btn = $("submit");
+      btn.disabled = true;
+      btn.textContent = "Memeriksa akses…";
+      try {
+        // Pastikan token valid, punya akses tulis, dan branch ada
+        const repo = await Admin.gh(s, Admin.repoBase(s));
+        if (!repo.permissions?.push) {
+          throw Object.assign(new Error("Token hanya punya akses baca. Beri izin \"Contents: Read and write\"."), { status: -1 });
+        }
+        await Admin.gh(s, `${Admin.repoBase(s)}/branches/${encodeURIComponent(s.branch)}`);
+
+        Admin.setConfig({ owner: s.owner, repo: s.repo, branch: s.branch });
+        Admin.setSession(s, $("remember").checked);
+        location.replace("index.html");
+      } catch (e) {
+        err.textContent = e.status === -1 ? e.message : Admin.explain(e);
+        err.hidden = false;
+        btn.disabled = false;
+        btn.textContent = "Masuk";
+      }
+    });
+  </script>
+</body>
+</html>

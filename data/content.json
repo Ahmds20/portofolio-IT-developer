@@ -341,29 +341,35 @@
       "label": "Academic Project",
       "periode": "Sep 2024 – Jan 2025",
       "judul": "E-commerce Coffee Shop",
-      "deskripsi": "A full-stack e-commerce website for a coffee shop with authentication, a shopping cart, order management, and payment integration. Frontend, backend, and database are integrated end to end.",
+      "deskripsi": "A full-stack e-commerce site for a coffee shop: menu with search and a best-seller carousel, cart, accounts with profiles, checkout with stock reservation, Stripe test payments and order tracking. Revamped and deployed in 2026 with Django 5.2 and PostgreSQL.",
       "metrik": [],
       "tag": [
         "Django",
-        "React",
+        "Python",
         "Tailwind CSS",
-        "PostgreSQL"
+        "PostgreSQL",
+        "Stripe",
+        "Vercel"
       ],
       "linkKode": "https://github.com/Ahmds20/Website-Kopi-4",
-      "linkDemo": "",
+      "linkDemo": "https://kopi4.vercel.app/",
       "jenis": "fullstack",
       "stack": [
         {
           "lapisan": "fe",
-          "teknologi": "React, Tailwind CSS, Figma"
+          "teknologi": "Django templates, Tailwind CSS, JavaScript, Figma"
         },
         {
           "lapisan": "be",
-          "teknologi": "Django, Python"
+          "teknologi": "Django, Python, Stripe"
         },
         {
           "lapisan": "db",
-          "teknologi": "PostgreSQL"
+          "teknologi": "PostgreSQL (Neon)"
+        },
+        {
+          "lapisan": "ops",
+          "teknologi": "Vercel"
         }
       ],
       "singkat": "Coffee Shop"

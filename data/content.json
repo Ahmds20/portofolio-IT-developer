@@ -241,6 +241,36 @@
       "keterangan": ""
     },
     {
+      "induk": "main",
+      "tutupInduk": false,
+      "teks": "",
+      "keterangan": "",
+      "aksi": "cabang",
+      "cabang": "freelance/habitflow",
+      "tanggal": "Nov 2026",
+      "tautan": ""
+    },
+    {
+      "induk": "main",
+      "tutupInduk": false,
+      "teks": "",
+      "keterangan": "",
+      "aksi": "commit",
+      "cabang": "freelance/habitflow",
+      "tanggal": "Nov 2026",
+      "tautan": "proyek:HabitFlow — Job Application & Habit Tracker"
+    },
+    {
+      "induk": "main",
+      "tutupInduk": false,
+      "teks": "",
+      "keterangan": "",
+      "aksi": "merge",
+      "cabang": "freelance/habitflow",
+      "tanggal": "Nov 2026",
+      "tautan": ""
+    },
+    {
       "aksi": "head",
       "cabang": "main",
       "induk": "main",
@@ -295,6 +325,46 @@
         }
       ],
       "singkat": "DDoS Detection"
+    },
+    {
+      "unggulan": false,
+      "ikon": "chart",
+      "label": "Freelance Project",
+      "periode": "Nov 2026",
+      "judul": "HabitFlow — Job Application & Habit Tracker",
+      "deskripsi": "A full-stack web app that helps job seekers stay consistent: a kanban board for applications with interviews, follow-ups and status history, plus habits with streaks and a weekly goal that counts applications automatically. Includes a one-click demo, English and Indonesian, light and dark themes, and unit, integration, end-to-end and accessibility tests.",
+      "metrik": [],
+      "tag": [
+        "Next.js",
+        "TypeScript",
+        "PostgreSQL",
+        "Prisma",
+        "Tailwind CSS",
+        "Playwright",
+        "Vercel"
+      ],
+      "linkKode": "https://github.com/Ahmds20/habitflowtracker",
+      "linkDemo": "https://habitflowtracker.vercel.app/",
+      "jenis": "fullstack",
+      "stack": [
+        {
+          "lapisan": "fe",
+          "teknologi": "Next.js, React, TypeScript, Tailwind CSS, shadcn/ui"
+        },
+        {
+          "lapisan": "be",
+          "teknologi": "Next.js Route Handlers, Zod, Argon2"
+        },
+        {
+          "lapisan": "db",
+          "teknologi": "PostgreSQL (Neon), Prisma"
+        },
+        {
+          "lapisan": "ops",
+          "teknologi": "Vercel, GitHub Actions, Upstash, Playwright"
+        }
+      ],
+      "singkat": "HabitFlow"
     },
     {
       "unggulan": false,
